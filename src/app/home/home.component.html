@@ -1,0 +1,23 @@
+
+<div class="container">
+  <div class="column">
+    <h1 class="title " size="80"><strong>Welcome {{this.name()}}</strong></h1>
+  </div>
+</div>
+
+<table class="table is-fullwidth" *ngIf="logged">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr is-fullwidth *ngFor="let row of users" class="table">
+      <td>{{row.name}}</td>
+      <td>{{row.surname}} </td> 
+      <td>{{change(row.state)}} </td>
+    </tr>
+  </tbody>
+</table>

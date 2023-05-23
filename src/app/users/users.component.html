@@ -1,0 +1,164 @@
+
+<h1 class="title has-text-centered">{{title}} users</h1>
+<div class="tabs">
+  <ul>
+    <li [ngClass]="{ 'is-active' : add }"><a (click)="userToggleA()">Active</a></li>
+    <li [ngClass]="{ 'is-active' : !add }"><a (click)="userToggleB()">Disabled</a></li>
+  </ul>
+</div>
+
+
+
+<br/>
+<br/>
+<button class="button is-black" *ngIf="add" (click)="toggleModalAdd()">Add user</button>
+<br/><br/>
+<table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>State</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr is-fullwidth *ngFor="let row of userData" class="table">
+        <th>{{row.id}} </th>
+        <td>{{row.name}}</td>
+        <td>{{row.surname}} </td> 
+        <td>{{row.email}} </td>
+        <td>{{change(row.state)}} </td>
+        <td>
+          <button class="button js-modal-trigger is-black" *ngIf="!add" (click)="activateUser(row)" data-target="modal-edit-user">enable</button>
+          <button class="button js-modal-trigger is-black" *ngIf="add" (click)="toggleModalEdit(row)" data-target="modal-edit-user">edit</button> | 
+          <button (click)="disableUser(row)" *ngIf="add" class="button is-red" >disable</button>
+          <button (click)="toggleDelete(row)" *ngIf="!add" class="button is-red" >delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal for add -->
+  <div class="modal" [ngClass]="{ 'is-active' : isModalActiveAdd }" id="modal-add-user">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Add User</p>
+        <button class="delete" (click)="toggleModalAdd()" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <p class="has-text-centered">
+          Name
+         </p>
+         <div class="field">
+           <input class="input" (input)="nameInput($any($event.target).value)" />
+         </div>
+   
+         <p class="has-text-centered">
+            Surname
+          </p>
+          <div class="field">
+            <input class="input" (input)="surnameInput($any($event.target).value)"/>
+          </div>
+
+          <p class="has-text-centered">
+            Email
+          </p>
+          <div class="field">
+            <input class="input" (input)="emailInput($any($event.target).value)"/>
+          </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button (click)="postUser()" class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal for edit -->
+  <div class="modal" [ngClass]="{ 'is-active' : isModalActive }" id="modal-edit-user">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit User</p>
+        <button class="delete"  (click)="toggleModalEdit(0)" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <p class="has-text-centered">
+          Name
+         </p>
+   
+         <div class="field">
+           <input class="input" value="{{name}}" (input)="nameInput($any($event.target).value)" />
+         </div>
+   
+         <p class="has-text-centered">
+            Surname
+          </p>
+
+          <div class="field">
+            <input class="input" value="{{surname}}" (input)="surnameInput($any($event.target).value)"/>
+          </div>
+
+          <!-- dropdown -->
+          <p>
+            Select Type of User
+          </p>
+
+          <div class="dropdown is-up" [ngClass]="{ 'is-active' : isDropdown }">
+            <div class="dropdown-trigger">
+              <button class="button" (click)="toggleDrop()" aria-haspopup="true" aria-controls="dropdown-menu3">
+                <span>{{dropText}}</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+              <div class="dropdown-content">
+                <p class="dropdown-item" (click)="drop(1)">
+                  Regular
+                </p>
+                <p class="dropdown-item" (click)="drop(2)">
+                  Admin
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+      </section>
+      <footer class="modal-card-foot">
+        <button (click)="updateUser()" (click)="toggleModalEdit(0)" class="button is-success">Save changes</button>
+        <button class="button" (click)="toggleModalEdit(0)" >Cancel</button>
+      </footer>
+    </div>
+  </div>
+
+    <!-- Modal for delete -->
+    <div class="modal" [ngClass]="{ 'is-active' : isModaldelete }" id="modal-add-user">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">delete User</p>
+          <button class="delete"  (click)="toggleDelete(0)" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <p class="has-text-centered">
+            Are you sure you want to permanently delete user's profile
+           </p>
+     
+        </section>
+        <footer class="modal-card-foot">
+          <button (click)="deleteUser()" class="button is-success">YES</button>
+          <button class="button" (click)="toggleDelete(0)">Cancel</button>
+        </footer>
+      </div>
+    </div>

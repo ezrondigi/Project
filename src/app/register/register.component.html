@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="columns is-centered">
+        <div class="box column is-one-third">
+            <h1 class="title has-text-centered">Register</h1>
+  
+            <p class="has-text-centered">
+                Name
+            </p>
+  
+            <div class="field">
+                <input class="input" (input)="nameInput($any($event.target).value)" />
+            </div>
+  
+            <p class="has-text-centered">
+                Surname
+            </p>
+   
+            <div class="field">
+                <input class="input" (input)="surnameInput($any($event.target).value)" />
+            </div>
+  
+
+            <p class="has-text-centered">
+                Email
+            </p>
+  
+            <div class="field">
+                <input class="input" (input)="emailInput($any($event.target).value)" />
+            </div>
+  
+            <p class="has-text-centered">
+                Password
+            </p>
+   
+            <div class="field">
+                <input class="input" type="password" (input)="passInput($any($event.target).value)"/>
+            </div>
+  
+            <div class="block" >
+             <button *ngIf="email.length && password.length != 0" (click)="postUser()" class="button is-black">Register</button>
+            </div>
+
+            <br/>
+            <p class="has-text-centered">already have an account? <a routerLink="../login">sign in</a> </p>
+  
+  
+  
+             <!-- for error message -->
+            <!-- <div *ngIf="randomText===enteredText" class="box has-text-centered">
+             <h1 class="title" disabled="true">Success!!!</h1>
+            </div> -->
+        
+      </div>
+    </div>
+</div>

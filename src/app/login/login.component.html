@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="columns is-centered">
+      <div class="box column is-one-third">
+        <h1 class="title has-text-centered">Log In</h1>
+  
+        <p class="has-text-centered">
+         Email
+        </p>
+  
+        <div class="field">
+          <input class="input" (input)="emailInput($any($event.target).value)" />
+        </div>
+  
+        <p class="has-text-centered">
+          Password
+         </p>
+   
+         <div class="field">
+           <input class="input" type="password" (input)="passInput($any($event.target).value)"/>
+         </div>
+  
+         <div class="block" >
+          <button *ngIf="email.length && password.length != 0" [ngClass]="{ 'is-loading' : loading }" (click)="userLogin()" class="button is-black">Login</button>
+         </div>
+  
+         <br/>
+         <br/>
+        <p class="has-text-centered">don't have an account? <a routerLink="../register">sign up</a> </p>
+        <p class="has-text-centered">forgot password? <a (click)="toggleForget()">click here</a> </p>
+  
+         <!-- for error message -->
+        <!-- <div *ngIf="randomText===enteredText" class="box has-text-centered">
+          <h1 class="title" disabled="true">Success!!!</h1>
+        </div> -->
+        
+      </div>
+    </div>
+
+
+     <!-- Modal for change password -->
+  <div class="modal" [ngClass]="{ 'is-active' : isModalForgot }" id="modal-add-user">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Add User</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <p class="has-text-centered">
+          email
+         </p>
+         <div class="field">
+           <input class="input" (input)="emailInput($any($event.target).value)"/>
+         </div>
+   
+         <p class="has-text-centered">
+            Surname
+          </p>
+          <div class="field">
+            <input class="input" (input)="surnameInput($any($event.target).value)"/>
+          </div>
+
+          <p class="has-text-centered">
+            password
+          </p>
+          <div class="field">
+            <input class="input" type="password" (input)="passInput($any($event.target).value)"/>
+          </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button (click)="setPassword()" class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+  </div>

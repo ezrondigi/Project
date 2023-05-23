@@ -1,0 +1,42 @@
+<nav class="navbar is-transparent is-black">
+  <div class="navbar-brand">
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="../home">
+        Home
+      </a>
+      <a class="navbar-item" *ngIf="state ==2" routerLink="../users">
+        Users
+      </a>
+      <a class="navbar-item" *ngIf="id !=0" routerLink="../profile">
+        Profile
+      </a>
+    </div>
+    <div style="float: right">
+      <a class="navbar-item" *ngIf="!loggedin()" routerLink="../login">
+        <strong>Login</strong>
+      </a>
+      <a (click)="logout()" *ngIf="loggedin()" class="navbar-item" routerLink="../home">
+        <strong>Logout</strong>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+  <br/><br/><br/><br/><br/>
+</div>
+
+<footer class="footer is-black">
+  <div class="content has-text-centered is-black">
+    <p>
+      <strong>DigiLink Project</strong> by <a routerLink="#">Ezron Mafolo</a>. The source code is not licensed
+      <a routerLink="#">DigiLink</a>. The website content
+      is really not licensed <a routerLink="#">CC BY NC SA 4.0</a>.
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,63 @@
+<div class="tile is-ancestor">
+    <div class="tile is-4 is-vertical is-parent">
+        <div class="tile is-child box">
+            <p class="title">Some Info</p>
+        </div>
+        <div class="tile is-child box">
+            <p class="title">Some Chart</p>
+            <img src="https://ronjeffries.com/xprog/images/burndown.jpg">
+        </div>
+        
+    </div>
+    <div class="tile is-parent">
+        <div class="tile is-child box content">
+            <h1 class="title">Your Details</h1>
+            <p>Name: {{userData.name}}</p>
+            <p>Surname: {{userData.surname}}</p>
+            <p>Email: {{userData.email}}</p>
+            <p type="password" >Password: Well we don't know that one. It's your secret</p>
+            <button (click)="toggleModalEdit()" class="button is-black">Edit</button>
+     </div>
+   </div>
+</div>
+
+ <!-- Modal for edit -->
+ <div class="modal" [ngClass]="{ 'is-active' : isModalActive }" >
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit User</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <p class="has-text-centered">
+          Name
+         </p>
+   
+         <div class="field">
+           <input class="input" value="{{name}}" (input)="nameInput($any($event.target).value)" />
+         </div>
+   
+         <p class="has-text-centered">
+            Surname
+          </p>
+
+          <div class="field">
+            <input class="input" value="{{surname}}" (input)="surnameInput($any($event.target).value)"/>
+          </div>
+
+          <p class="has-text-centered">
+            Password
+          </p>
+
+          <div class="field">
+            <input class="input" value="{{surname}}" type="password" (input)="passwordInput($any($event.target).value)"/>
+          </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button (click)="updateUser()" class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
